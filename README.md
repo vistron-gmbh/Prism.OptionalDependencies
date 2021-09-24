@@ -8,6 +8,8 @@ In case you need a Module to be loaded before another but do not want a mandator
 
 Without optional dependencies one would need to implement service classes which provide an event to signal everyone that the hardware is now connected so even modules initialized before know about it. This approach works but makes the code more complicated and harder to read.
 
+> Please Note: After consideration I decided that the mentioned alternative is most of the time the better approach because otherwise the depending Module needs to know the exact Names of the targets which is not always the case. But you might know parts of their names therefore this package shall be extended with another tag like `[match]` where all modules are added as dependencies which match the given string. Doing this e.g. all modules with the string "Controller" can be added as a dependency. But this problem might be better solved with a DI Service like mentioned above.
+
 ## How it is done
 
 The easiest way to achieve optional dependencies was to not adjust the handling of Modules itself by adding a new `OptionalDependency Property` but just post-Evaluate the Modules inside the catalog after the catalog is build and using the existing strings to tag them.
