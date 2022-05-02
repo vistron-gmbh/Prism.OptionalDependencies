@@ -1,0 +1,13 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!-- Vistron.targets Version 0.5 -->
+
+    <PropertyGroup Label="General">
+        <Company>Vistron GmbH</Company>
+        <Copyright>Copyright © Vistron GmbH 2022</Copyright>
+    </PropertyGroup>
+
+    <PropertyGroup Label="RepositorySpecific">
+        <Authors>Manuel Blattner</Authors>
+        <RepositoryUrl></RepositoryUrl>
+    </PropertyGroup>
+</Project>
