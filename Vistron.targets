@@ -8,6 +8,6 @@
 
     <PropertyGroup Label="RepositorySpecific">
         <Authors>Manuel Blattner</Authors>
-        <RepositoryUrl></RepositoryUrl>
+        <RepositoryUrl>https://github.com/vistron-gmbh/Prism.OptionalDependencies.git</RepositoryUrl>
     </PropertyGroup>
 </Project>
