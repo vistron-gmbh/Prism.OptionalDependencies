@@ -1,0 +1,36 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!-- Vistron.props Version 0.5 -->
+
+    <PropertyGroup Label="General">
+        <!--<TargetFrameworks>net48</TargetFrameworks>-->
+        <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
+
+        <UseWPF>true</UseWPF>
+        <PlatformTarget>AnyCPU</PlatformTarget>
+
+        <!-- Add framework subfolder in bin? -->
+        <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+        <!-- Add Runtime subfolder in bin? -->
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <!-- Need NuGet License? -->
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+
+	<PropertyGroup Label="General_Debug" Condition="'$(Configuration)'=='Debug'">
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug</OutputPath>
+    </PropertyGroup>
+
+    <PropertyGroup Label="General_Release" Condition="'$(Configuration)'=='Release'">
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release</OutputPath>
+        <!-- Create NuGet on Build? -->
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Label="RepositorySpecific">
+        <TargetFrameworks>net48</TargetFrameworks>
+    </PropertyGroup>
+</Project>
