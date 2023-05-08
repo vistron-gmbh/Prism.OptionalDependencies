@@ -1,24 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <Import Project="..\..\Vistron.props" Condition="Exists('..\\..\\Vistron.props')" />
-
-    <PropertyGroup>
-        <Product>Prism.OptionalDependencies</Product>
-        <Version>1.0.1</Version>
-    </PropertyGroup>
-
-    <PropertyGroup>
-        <Description>Provides custom prism module catalogs which support optional dependencies</Description>
-        <PackageReleaseNotes>
+  <Import Project="..\..\Vistron.props" Condition="Exists('..\\..\\Vistron.props')" />
+  <PropertyGroup>
+    <Product>Prism.OptionalDependencies</Product>
+    <Version>1.1.0.0</Version>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Description>Provides custom prism module catalogs which support optional dependencies</Description>
+    <PackageReleaseNotes>            1.1.0 - ConfigCatalog supports dependency attributes as well
             1.0.1 - 2022 Update (net48 only)
             1.0.0 - Compiled with xml documentation
         </PackageReleaseNotes>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
-        <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
-    </ItemGroup>
-
-    <Import Project="..\..\Vistron.targets" Condition="Exists('..\\..\\Vistron.targets')" />
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
+    <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
+  </ItemGroup>
+  <Import Project="..\..\Vistron.targets" Condition="Exists('..\\..\\Vistron.targets')" />
 </Project>

@@ -1,0 +1,18 @@
+# Version 0.1 [March.2023, TF]
+name: CallPushToMain
+
+on:
+  # Trigger the workflow on push,
+  push:
+    # Restrict to pushes on main and master
+    branches:
+      - master
+      - main
+  
+  # Allow for manual start of the test
+  workflow_dispatch:
+
+jobs:
+  PTM:
+    uses: vistron-gmbh/Vistron.GitHub.Actions/.github/workflows/PushToMain.yml@main
+    secrets: inherit
