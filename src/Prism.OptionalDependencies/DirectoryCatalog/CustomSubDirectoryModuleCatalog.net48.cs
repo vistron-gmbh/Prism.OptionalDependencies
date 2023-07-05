@@ -1,6 +1,4 @@
-﻿#if !NET5_0_OR_GREATER
-
-using Prism.Modularity;
+﻿using Prism.Modularity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,5 +19,3 @@ namespace Prism.Modularity.OptionalDependencies
         }
     }
 }
-
-#endif

@@ -1,5 +1,5 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-<!-- Vistron.props Version 0.6.4 -->
+    <!-- Vistron.props Version 0.6.4 -->
 
     <PropertyGroup Label="General">
         <DotNet>net48;net6.0</DotNet>
@@ -19,14 +19,14 @@
         <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
         <!-- Need NuGet License? -->
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-	</PropertyGroup>
+    </PropertyGroup>
 
     <ItemGroup>
         <InternalsVisibleTo Include="UnitTests" />
         <InternalsVisibleTo Include="Examples" />
     </ItemGroup>
 
-	<PropertyGroup Label="General_Debug" Condition="'$(Configuration)'=='Debug'">
+    <PropertyGroup Label="General_Debug" Condition="'$(Configuration)'=='Debug'">
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <NoWarn>1701;1702;CS1591</NoWarn>
         <Optimize>false</Optimize>
@@ -43,4 +43,16 @@
 
     <PropertyGroup Label="RepositorySpecific">
     </PropertyGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
+        <Compile Remove="**\*.net6.cs" />
+        <None Include="**\*.net6.cs" />
+        <Reference Include="System.Configuration" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('net6')) ">
+        <Compile Remove="**\*.net48.cs" />
+        <None Include="**\*.net48.cs" />
+        <Reference Include="System.Configuration" />
+    </ItemGroup>
 </Project>

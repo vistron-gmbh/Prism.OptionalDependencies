@@ -12,7 +12,6 @@
         1.0.1 - 2022 Update (net48 only)
         1.0.0 - Compiled with xml documentation
     </PackageReleaseNotes>
-
   </PropertyGroup>
   <ItemGroup>
      <PackageReference Include="Prism.Core" Version="7.2.0.1422" Condition=" '$(TargetFramework)' == 'net48' " />
@@ -24,4 +23,7 @@
     <PackageReference Include="Vistron.Tools.Assemblies" Version="0.1.0" />
   </ItemGroup>
   <Import Project="..\..\Vistron.targets" Condition="Exists('..\\..\\Vistron.targets')" />
+
+
+
 </Project>
