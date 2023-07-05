@@ -53,6 +53,5 @@
     <ItemGroup Condition=" $(TargetFramework.StartsWith('net6')) ">
         <Compile Remove="**\*.net48.cs" />
         <None Include="**\*.net48.cs" />
-        <Reference Include="System.Configuration" />
     </ItemGroup>
 </Project>
