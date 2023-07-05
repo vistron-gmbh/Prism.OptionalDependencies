@@ -1,4 +1,6 @@
-﻿using Prism.Properties;
+﻿#if !NET5_0_OR_GREATER
+
+using Prism.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -78,7 +80,6 @@ namespace Prism.Modularity.OptionalDependencies
                 AppDomain.Unload(childDomain);
             }
         }
-
 
         /// <summary>
         /// Creates a new child domain and copies the evidence from a parent domain.
@@ -254,3 +255,5 @@ namespace Prism.Modularity.OptionalDependencies
         }
     }
 }
+
+#endif

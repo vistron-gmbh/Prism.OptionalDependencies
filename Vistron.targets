@@ -1,13 +1,28 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-<!-- Vistron.targets Version 0.5 -->
+    <!-- Vistron.targets Version 0.6.3 -->
 
     <PropertyGroup Label="General">
         <Company>Vistron GmbH</Company>
-        <Copyright>Copyright © Vistron GmbH 2022</Copyright>
+        <Copyright>Copyright © Vistron GmbH 2023</Copyright>
+
+        <UseWPF Condition="'$(TargetFramework)'=='net48'">true</UseWPF>
+        <UseWPF Condition=" $(TargetFramework.Contains('-windows')) ">true</UseWPF>
+
+        <OutputPath>..\..\bin\$(Product)\$(Configuration)</OutputPath>
     </PropertyGroup>
 
+    <!-- 
+    <Authors>Manuel Blattner</Authors>
+    <Authors>Mitja Bochman</Authors>
+    <Authors>Thomas Fulle</Authors>
+    <Authors>Manuel Blattner, Mitja Bochman</Authors>
+    <Authors>Manuel Blattner, Thomas Fulle</Authors>
+    <Authors>Manuel Blattner, Mitja Bochman, Thomas Fulle</Authors>
+    -->
+
     <PropertyGroup Label="RepositorySpecific">
-        <Authors>Manuel Blattner</Authors>
-        <RepositoryUrl>https://github.com/vistron-gmbh/Prism.OptionalDependencies.git</RepositoryUrl>
+        <Authors>ADD_AUTHORS</Authors>
+        <PackageProjectUrl>ADD_GITHUB_URL</PackageProjectUrl>
+        <RepositoryUrl>$(PackageProjectUrl).git</RepositoryUrl>
     </PropertyGroup>
 </Project>

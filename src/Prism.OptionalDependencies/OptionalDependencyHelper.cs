@@ -35,23 +35,24 @@ namespace Prism.Modularity.OptionalDependencies
 
 		public static void HandleOptionalDependencies(IEnumerable<IModuleInfo> modules)
 		{
-			var knownModules = modules.Select(x => x.ModuleName).ToList();
+			var knownModules = modules.ToList();
 			foreach (var module in modules)
 			{
 				ReplaceOptionalDependencies(module, knownModules);
 			}
 		}
 
-		private static void ReplaceOptionalDependencies(IModuleInfo module, ICollection<string> knownModules)
+		private static void ReplaceOptionalDependencies(IModuleInfo module, ICollection<IModuleInfo> knownModules)
 		{
-			module.DependsOn.ForEachIndexed((dependency, i) =>
+			module.DependsOn.ToArray().ForEachIndexed((dependency, i) =>
 			{
 				string current = dependency;
 				if (IsOptional(ref current))
-				{
-					module.DependsOn.Remove(dependency); //We must remove it in any case at it contains the tag
-					if (knownModules.Contains(current)) //We only add it back (without the tag) when the dependency is actually solvable.
+				{               //We only add it back (without the tag) when the dependency is actually solvable.
+					if (knownModules.FirstOrDefault(x => x.ModuleName == current) is IModuleInfo dependendModule && dependendModule.InitializationMode == InitializationMode.WhenAvailable)
 						module.DependsOn[i] = current;
+					else
+						module.DependsOn.Remove(dependency);    //We must remove it in any case at it contains the tag
 				}
 			});
 		}

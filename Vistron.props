@@ -1,11 +1,16 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-<!-- Vistron.props Version 0.5 -->
+<!-- Vistron.props Version 0.6.4 -->
 
     <PropertyGroup Label="General">
-        <!--<TargetFrameworks>net48</TargetFrameworks>-->
-        <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
+        <DotNet>net48;net6.0</DotNet>
+        <!--<DotNet>net48;net6.0;net7.0</DotNet>-->
+        <DotNetWindows>net48;net6.0-windows</DotNetWindows>
+        <!--<DotNetWindows>net48;net6.0-windows;net7.0-windows</DotNetWindows>-->
+        <DotNetAll>net48;net6.0;net6.0-windows</DotNetAll>
+        <!--<DotNetAll>net48;net6.0;net6.0-windows;net7.0;net7.0-windows</DotNetAll>-->
 
-        <UseWPF>true</UseWPF>
+        <TargetFrameworks>$(DotNetWindows)</TargetFrameworks>
+
         <PlatformTarget>AnyCPU</PlatformTarget>
 
         <!-- Add framework subfolder in bin? -->
@@ -16,8 +21,14 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="UnitTests" />
+        <InternalsVisibleTo Include="Examples" />
+    </ItemGroup>
+
 	<PropertyGroup Label="General_Debug" Condition="'$(Configuration)'=='Debug'">
         <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <NoWarn>1701;1702;CS1591</NoWarn>
         <Optimize>false</Optimize>
         <OutputPath>bin\Debug</OutputPath>
     </PropertyGroup>
@@ -31,6 +42,5 @@
     </PropertyGroup>
 
     <PropertyGroup Label="RepositorySpecific">
-        <TargetFrameworks>net48</TargetFrameworks>
     </PropertyGroup>
 </Project>
