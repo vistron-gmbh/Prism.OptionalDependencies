@@ -1,4 +1,4 @@
-[![AdvancedChecks](https://github.com/vistron-gmbh/Prism.OptionalDependencies/actions/workflows/AdvancedChecks.yml/badge.svg)](https://github.com/vistron-gmbh/Prism.OptionalDependencies/actions/workflows/AdvancedChecks.yml)
+[![.github/workflows/CallPublicVistronRepoChecks.yml](https://github.com/vistron-gmbh/Prism.OptionalDependencies/actions/workflows/CallPublicVistronRepoChecks.yml/badge.svg)](https://github.com/vistron-gmbh/Prism.OptionalDependencies/actions/workflows/CallPublicVistronRepoChecks.yml)
 # Prism.OptionalDependencies
 
 *This package provides some custom Prism ModuleCatalogs which allows optional module dependencies for Prism Modules as well as an `OptionalDependencyHelper` to achieve the same with any custom catalog.*
