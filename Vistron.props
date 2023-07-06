@@ -1,6 +1,10 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <!-- Vistron.props Version 0.6.4 -->
+    <!-- Vistron.props Version 0.6.6 -->
 
+    <!-- "DO NOT EDIT" Sections are defaults that are only to be updated automatically. -->
+    <!-- All "DO NOT EDIT" settings can be overwritten in the "EDIT HERE" sections. -->
+
+    <!-- ################ DO NOT EDIT ################ -->
     <PropertyGroup Label="General">
         <DotNet>net48;net6.0</DotNet>
         <!--<DotNet>net48;net6.0;net7.0</DotNet>-->
@@ -8,8 +12,6 @@
         <!--<DotNetWindows>net48;net6.0-windows;net7.0-windows</DotNetWindows>-->
         <DotNetAll>net48;net6.0;net6.0-windows</DotNetAll>
         <!--<DotNetAll>net48;net6.0;net6.0-windows;net7.0;net7.0-windows</DotNetAll>-->
-
-        <TargetFrameworks>$(DotNetWindows)</TargetFrameworks>
 
         <PlatformTarget>AnyCPU</PlatformTarget>
 
@@ -21,11 +23,13 @@
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     </PropertyGroup>
 
+    <!-- ################ DO NOT EDIT ################ -->
     <ItemGroup>
         <InternalsVisibleTo Include="UnitTests" />
         <InternalsVisibleTo Include="Examples" />
     </ItemGroup>
 
+    <!-- ################ DO NOT EDIT ################ -->
     <PropertyGroup Label="General_Debug" Condition="'$(Configuration)'=='Debug'">
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <NoWarn>1701;1702;CS1591</NoWarn>
@@ -33,6 +37,7 @@
         <OutputPath>bin\Debug</OutputPath>
     </PropertyGroup>
 
+    <!-- ################ DO NOT EDIT ################ -->
     <PropertyGroup Label="General_Release" Condition="'$(Configuration)'=='Release'">
         <Optimize>true</Optimize>
         <OutputPath>bin\Release</OutputPath>
@@ -41,7 +46,9 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
+    <!-- <<<<<<<<<<<<<<<< EDIT HERE >>>>>>>>>>>>>>>> -->
     <PropertyGroup Label="RepositorySpecific">
+        <TargetFrameworks>$(DotNetWindows)</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">

@@ -1,6 +1,10 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <!-- Vistron.targets Version 0.6.3 -->
+    <!-- Vistron.targets Version 0.6.6 -->
 
+    <!-- "DO NOT EDIT" Sections are defaults that are only to be updated automatically. -->
+    <!-- All "DO NOT EDIT" settings can be overwritten in the "EDIT HERE" sections. -->
+
+    <!-- ################ DO NOT EDIT ################ -->
     <PropertyGroup Label="General">
         <Company>Vistron GmbH</Company>
         <Copyright>Copyright © Vistron GmbH 2023</Copyright>
@@ -11,18 +15,14 @@
         <OutputPath>..\..\bin\$(Product)\$(Configuration)</OutputPath>
     </PropertyGroup>
 
-    <!-- 
-    <Authors>Manuel Blattner</Authors>
-    <Authors>Mitja Bochman</Authors>
-    <Authors>Thomas Fulle</Authors>
-    <Authors>Manuel Blattner, Mitja Bochman</Authors>
-    <Authors>Manuel Blattner, Thomas Fulle</Authors>
-    <Authors>Manuel Blattner, Mitja Bochman, Thomas Fulle</Authors>
-    -->
-
+    <!-- <<<<<<<<<<<<<<<< EDIT HERE >>>>>>>>>>>>>>>> -->
     <PropertyGroup Label="RepositorySpecific">
-        <Authors>ADD_AUTHORS</Authors>
-        <PackageProjectUrl>ADD_GITHUB_URL</PackageProjectUrl>
+        <Authors>Manuel Blattner</Authors>
+        <PackageProjectUrl>https://github.com/vistron-gmbh/Prism.OptionalDependencies</PackageProjectUrl>
+    </PropertyGroup>
+
+    <!-- ################ DO NOT EDIT ################ -->
+    <PropertyGroup Label="General_RepositoryUrl">
         <RepositoryUrl>$(PackageProjectUrl).git</RepositoryUrl>
     </PropertyGroup>
 </Project>
