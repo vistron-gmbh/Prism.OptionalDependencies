@@ -1,4 +1,4 @@
-# Version 0.1.1 [Jul.2023, TF]
+# Version 0.1.2 [Jul.2023, TF]
 name: CallPublicVistronRepoChecks
 
 on:
@@ -17,5 +17,5 @@ on:
   
 jobs:
   R:
-    uses: vistron-gmbh/Vistron.GitHub.Actions/.github/workflows/PublicVistronRepoChecks.yml@main
+    uses: vistron-gmbh/Vistron.PublicResources/.github/workflows/PublicVistronRepoChecks.yml@main
     secrets: inherit
