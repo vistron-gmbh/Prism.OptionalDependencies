@@ -79,7 +79,6 @@ namespace Prism.Modularity.OptionalDependencies
             }
         }
 
-
         /// <summary>
         /// Creates a new child domain and copies the evidence from a parent domain.
         /// </summary>

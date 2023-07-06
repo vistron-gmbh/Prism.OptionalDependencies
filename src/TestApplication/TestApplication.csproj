@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="..\..\Vistron.props" Condition="Exists('..\\..\\Vistron.props')" />
+
+    <PropertyGroup>
+        <Product>TestApplication</Product>
+        <Version>0.0.1</Version>
+        <TargetFrameworks>net48</TargetFrameworks>
+        <OutputType>Exe</OutputType>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <Import Project="..\..\Vistron.targets" Condition="Exists('..\\..\\Vistron.targets')" />
+
+    <ItemGroup>
+        <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
+        <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Prism.OptionalDependencies\Prism.OptionalDependencies.csproj" />
+    </ItemGroup>
+</Project>

@@ -1,11 +1,18 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-<!-- Vistron.props Version 0.5 -->
+    <!-- Vistron.props Version 0.6.6 -->
 
+    <!-- "DO NOT EDIT" Sections are defaults that are only to be updated automatically. -->
+    <!-- All "DO NOT EDIT" settings can be overwritten in the "EDIT HERE" sections. -->
+
+    <!-- ################ DO NOT EDIT ################ -->
     <PropertyGroup Label="General">
-        <!--<TargetFrameworks>net48</TargetFrameworks>-->
-        <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
+        <DotNet>net48;net6.0</DotNet>
+        <!--<DotNet>net48;net6.0;net7.0</DotNet>-->
+        <DotNetWindows>net48;net6.0-windows</DotNetWindows>
+        <!--<DotNetWindows>net48;net6.0-windows;net7.0-windows</DotNetWindows>-->
+        <DotNetAll>net48;net6.0;net6.0-windows</DotNetAll>
+        <!--<DotNetAll>net48;net6.0;net6.0-windows;net7.0;net7.0-windows</DotNetAll>-->
 
-        <UseWPF>true</UseWPF>
         <PlatformTarget>AnyCPU</PlatformTarget>
 
         <!-- Add framework subfolder in bin? -->
@@ -14,14 +21,23 @@
         <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
         <!-- Need NuGet License? -->
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-	</PropertyGroup>
+    </PropertyGroup>
 
-	<PropertyGroup Label="General_Debug" Condition="'$(Configuration)'=='Debug'">
+    <!-- ################ DO NOT EDIT ################ -->
+    <ItemGroup>
+        <InternalsVisibleTo Include="UnitTests" />
+        <InternalsVisibleTo Include="Examples" />
+    </ItemGroup>
+
+    <!-- ################ DO NOT EDIT ################ -->
+    <PropertyGroup Label="General_Debug" Condition="'$(Configuration)'=='Debug'">
         <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <NoWarn>1701;1702;CS1591</NoWarn>
         <Optimize>false</Optimize>
         <OutputPath>bin\Debug</OutputPath>
     </PropertyGroup>
 
+    <!-- ################ DO NOT EDIT ################ -->
     <PropertyGroup Label="General_Release" Condition="'$(Configuration)'=='Release'">
         <Optimize>true</Optimize>
         <OutputPath>bin\Release</OutputPath>
@@ -30,7 +46,19 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
 
+    <!-- <<<<<<<<<<<<<<<< EDIT HERE >>>>>>>>>>>>>>>> -->
     <PropertyGroup Label="RepositorySpecific">
-        <TargetFrameworks>net48</TargetFrameworks>
+        <TargetFrameworks>$(DotNetWindows)</TargetFrameworks>
     </PropertyGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('net4')) ">
+        <Compile Remove="**\*.net6.cs" />
+        <None Include="**\*.net6.cs" />
+        <Reference Include="System.Configuration" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" $(TargetFramework.StartsWith('net6')) ">
+        <Compile Remove="**\*.net48.cs" />
+        <None Include="**\*.net48.cs" />
+    </ItemGroup>
 </Project>
