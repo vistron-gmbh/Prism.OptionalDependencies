@@ -13,10 +13,11 @@ namespace Prism.Modularity.OptionalDependencies
     {
         private readonly ILogger _logger;
 
+        [Obsolete("Please use the logger ctor. It logs exceptions during module inspection.")]
         public CustomConfigurationModuleCatalog()
         {
-            _logger = new NullLogger();
         }
+
         public CustomConfigurationModuleCatalog(ILogger logger)
         {
             _logger = logger;
@@ -25,8 +26,20 @@ namespace Prism.Modularity.OptionalDependencies
         protected override void InnerLoad()
         {
             base.InnerLoad();
-            AddAttributeDependencies(Modules); //With this the catalog supports also dependencies declared in the type itself
+            AddAttributeDependencies(Modules, _logger); //With this the catalog supports also dependencies declared in the type itself
             OptionalDependencyHelper.HandleOptionalDependencies(Modules); //Replaces the optional dependencies with mandatory ones if the needed module is available.
+        }
+
+        private void AddAttributeDependencies(IEnumerable<IModuleInfo> modules, ILogger logger)
+        {
+            try
+            {
+                AddAttributeDependencies(modules);
+            }
+            catch (AggregateException ex)
+            {
+                logger?.LogException(ex);
+            }
         }
     }
 }

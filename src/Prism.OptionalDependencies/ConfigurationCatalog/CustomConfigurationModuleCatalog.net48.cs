@@ -9,8 +9,6 @@ using System.Runtime.Loader;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Vistron.Logging;
-using Vistron.Tools.Assemblies;
 
 namespace Prism.Modularity.OptionalDependencies
 {
@@ -22,27 +20,32 @@ namespace Prism.Modularity.OptionalDependencies
     {
         //The net48 Version uses AppDomains to inspect the Module Attributes therefore not interfering with the module load order. The load order was changed before 1.2.0.
 
-        private void AddAttributeDependencies(IEnumerable<IModuleInfo> modules)
+        private static void AddAttributeDependencies(IEnumerable<IModuleInfo> modules)
         {
             var temporaryAppDomain = AppDomain.CreateDomain("TemporaryOptionalDependencyDomain");
-
+            List<Exception> exceptions = new List<Exception>();
             foreach (IModuleInfo module in modules)
-                AddAttributeDependencies(module, temporaryAppDomain);
+            {
+                try
+                {
+                    AddAttributeDependencies(module, temporaryAppDomain);
+                }
+                catch (Exception ex)
+                {
+                    exceptions.Add(ex);
+                }
+            }
 
             AppDomain.Unload(temporaryAppDomain);
+
+            if (exceptions.Any())
+                throw new AggregateException("Exceptions during attribute dependency addition", exceptions);
         }
 
-        private void AddAttributeDependencies(IModuleInfo module, AppDomain temporaryAppDomain)
+        private static void AddAttributeDependencies(IModuleInfo module, AppDomain temporaryAppDomain)
         {
-            try
-            {
-                temporaryAppDomain.SetData("module", module); //There are other ways to get data into the method, e.g. by building a serializable Host class, but this seems simpler.
-                temporaryAppDomain.DoCallBack(AddAttributeDependenciesCrossAppDomain); //One cannot use lamba here as the classes generated are not serializable.
-            }
-            catch (Exception ex)
-            {
-                _logger.LogException(ex);
-            }
+            temporaryAppDomain.SetData("module", module); //There are other ways to get data into the method, e.g. by building a serializable Host class, but this seems simpler.
+            temporaryAppDomain.DoCallBack(AddAttributeDependenciesCrossAppDomain); //One cannot use lamba here as the classes generated are not serializable.
         }
 
         private static void AddAttributeDependenciesCrossAppDomain() //This method needs to be static and parameterless so we can serialize it into the temp appdomain
@@ -56,7 +59,6 @@ namespace Prism.Modularity.OptionalDependencies
         {
             // Load and inspect the assembly
             Uri uri = new Uri(module.Ref);
-            var testCurrent = AppDomain.CurrentDomain.FriendlyName;
 
             //var assemblyName = AssemblyName.GetAssemblyName(uri.LocalPath);
             var assembly = Assembly.LoadFrom(uri.LocalPath);

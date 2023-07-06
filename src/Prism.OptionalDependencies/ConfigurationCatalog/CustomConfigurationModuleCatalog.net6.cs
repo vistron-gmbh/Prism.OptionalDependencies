@@ -13,36 +13,42 @@ namespace Prism.Modularity.OptionalDependencies
     {
         //The net6 Version uses AssemblyLoadContext to inspect the Module Attributes therefore not interfering with the module load order. The load order was changed before 1.2.0.
 
-        private void AddAttributeDependencies(IEnumerable<IModuleInfo> modules)
+        private static void AddAttributeDependencies(IEnumerable<IModuleInfo> modules)
         {
+            List<Exception> exceptions = new List<Exception>();
             foreach (IModuleInfo module in modules)
-                AddAttributeDependencies(module);
+            {
+                try
+                {
+                    AddAttributeDependencies(module);
+                }
+                catch (Exception ex)
+                {
+                    exceptions.Add(ex);
+                }
+            }
+
+            if (exceptions.Any())
+                throw new AggregateException("Exceptions during attribute dependency addition", exceptions);
         }
 
-        private void AddAttributeDependencies(IModuleInfo module)
+        private static void AddAttributeDependencies(IModuleInfo module)
         {
-            try
-            {
-                var moduleTypeCleaned = new string(module.ModuleType.TakeWhile(x => x != ',').ToArray()); //We need to remove the Namespace end for some reason.
-                AssemblyLoadContext customLoadContext = new AssemblyLoadContext("tempLoadContextModuleDependencyCheck", true);
+            var moduleTypeCleaned = new string(module.ModuleType.TakeWhile(x => x != ',').ToArray()); //We need to remove the Namespace end for some reason.
+            AssemblyLoadContext customLoadContext = new AssemblyLoadContext("tempLoadContextModuleDependencyCheck", true);
 
-                var assembly = customLoadContext.LoadFromAssemblyPath(module.Ref);
+            var assembly = customLoadContext.LoadFromAssemblyPath(module.Ref);
 
-                Type moduleType = assembly.GetType(moduleTypeCleaned);
+            Type moduleType = assembly.GetType(moduleTypeCleaned);
 
-                var moduleDependencyAttributes =
-                    CustomAttributeData.GetCustomAttributes(moduleType).Where(
-                    cad => cad.Constructor.DeclaringType.FullName == typeof(ModuleDependencyAttribute).FullName);
+            var moduleDependencyAttributes =
+                CustomAttributeData.GetCustomAttributes(moduleType).Where(
+                cad => cad.Constructor.DeclaringType.FullName == typeof(ModuleDependencyAttribute).FullName);
 
-                foreach (CustomAttributeData cad in moduleDependencyAttributes)
-                    module.DependsOn.Add((string)cad.ConstructorArguments[0].Value);
+            foreach (CustomAttributeData cad in moduleDependencyAttributes)
+                module.DependsOn.Add((string)cad.ConstructorArguments[0].Value);
 
-                customLoadContext.Unload();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogException(ex);
-            }
+            customLoadContext.Unload();
         }
     }
 }

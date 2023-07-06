@@ -21,11 +21,7 @@
         <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" Condition=" '$(TargetFramework)' == 'net48' " />
         <PackageReference Include="Prism.Wpf" Version="8.1.97" Condition=" '$(TargetFramework)' != 'net48' " />
         <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
-        <!--<PackageReference Include="Vistron.Logging.Abstractions" Version="2.0.0.1" Condition=" '$(TargetFramework)' != 'net48' " />
-        <PackageReference Include="Vistron.Logging.Core" Version="0.6.0.1" Condition=" '$(TargetFramework)' == 'net48' " />-->
-        <PackageReference Include="Vistron.StaticLogging" Version="0.3.2" />
-        <!--<PackageReference Include="Vistron.Configuration.Core" Version="1.4.1" />-->
-        <PackageReference Include="Vistron.Tools.Assemblies" Version="0.1.0" />
+        <PackageReference Include="Vistron.Core" Version="0.8.3" />
     </ItemGroup>
     
     <Import Project="..\..\Vistron.targets" Condition="Exists('..\\..\\Vistron.targets')" />
